@@ -107,7 +107,7 @@ Git
 Installation
 Clone the repository:
 
-git clone https://github.com/YourGitHubUsername/your-repo-name.git
+git clone https://github.com/cboyer-engineer/Stock-Portfolio-ML-Project
 cd your-repo-name
 
 (Remember to replace YourGitHubUsername and your-repo-name with your actual GitHub details.)
