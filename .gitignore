@@ -1,62 +1,21 @@
-# created by virtualenv automatically
-# created by virtualenv automatically  <-- Keep this comment if you like
-# .gitignore for a Python PyCharm project with ML and data files
+# PyCharm project files
+.idea/
 
 # Python virtual environment
 .venv/
-venv/  # Also commonly named 'venv'
-
-# PyCharm project files
-.idea/
+venv/ # Include if you might use 'venv' instead of '.venv'
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.pyc
-*.pyd
-*.pyo
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-build/
-dist/
-eggs/
-*.egg-info/
-.cache/
-.tox/
-.coverage
-.pytest_cache/
-htmlcov/
-
-# Logs and databases
-*.log
-*.sqlite3
-*.db
-
-# OS-specific files
-.DS_Store # macOS
-Thumbs.db # Windows
-ehthumbs.db # Windows
-Desktop.ini # Windows
 
 # Environment variables
 .env
-.env.*
-!.env.example # Keep this if you want to include a template for .env
-
-# Data files (generated or personal, not part of source control)
-# It's crucial to NOT commit large datasets or sensitive personal data.
-# If 'Stocks.xlsx' contains personal holdings you don't want public, ignore it.
-# If 'yahooSemi_2010_2025.csv' is generated and can be recreated, ignore it.
-data/yahooSemi_2010_2025.csv
-# data/Stocks.xlsx  # Uncomment this line if you do NOT want your personal stock holdings committed
-# If you have other large or temporary data files in 'data/'
-# data/*.tmp
-# data/*.bak
 
 # Machine Learning artifacts (trained models, preprocessors)
 my_model.keras
 preprocessor.pkl
-*.joblib
-*.h5 # Keras/TensorFlow models
+
+# Data files (generated or personal)
+data/yahooSemi_2010_2025.csv
+# data/Stocks.xlsx  # Uncomment this line if you do NOT want your personal stock holdings committed
