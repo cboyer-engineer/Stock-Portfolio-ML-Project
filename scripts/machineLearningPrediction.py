@@ -17,7 +17,7 @@ from datetime import datetime, timedelta
 #load data
 # call yahooHistoricData and pull data from yfinance
 yahooHistoricData.dataPullYahoo()
-data = pd.read_csv(r'C:\Users\yourusername\stockReportingSuite\data\yahooSemi_2010_2025.csv')
+data = pd.read_csv(r'C:\Users\Cdabo\PycharmProjects\stockReportingSuite\data\yahooSemi_2010_2025.csv')
 
 # Convert Close to numeric — this may introduce NaNs
 data['Close'] = pd.to_numeric(data['Close'], errors='coerce')
@@ -129,7 +129,7 @@ plt.show()
 print("\n--- Predicted Closing Prices for Latest Available Date ---")
 
 # Load your list of ETFs (Symbols) from the Excel file
-df_etfs = pd.read_excel(r'C:\Users\yourusername\stockReportingSuite\data\Stocks.xlsx')
+df_etfs = pd.read_excel(r'C:\Users\Cdabo\PycharmProjects\stockReportingSuite\data\Stocks.xlsx')
 symbols = df_etfs['Stock ETF'].tolist()
 
 #Start loop to step through ETF symbols based on number of symbols

@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 def dataPullYahoo():
     # Pull stock symbol and date range from the Stock excel file
-    df = pd.read_excel(r'C:\Users\yourusernames\stockReportingSuite\data\Stocks.xlsx')
+    df = pd.read_excel(r'C:\Users\Cdabo\PycharmProjects\stockReportingSuite\data\Stocks.xlsx')
     symbols = df['Stock ETF'].tolist()
     #define start date of stocks historical capture
     start_date = "2020-01-01"
@@ -76,7 +76,7 @@ def dataPullYahoo():
         except Exception as e:
             print(f"Error fetching data for {symbol}: {e}")
     # Save to CSV
-    output_file = r'C:\Users\yourusername\stockReportingSuite\data\yahooSemi_2010_2025.csv'
+    output_file = r'C:\Users\Cdabo\PycharmProjects\stockReportingSuite\data\yahooSemi_2010_2025.csv'
     combined_data.to_csv(output_file, index=False)
     #print(f"Dataset saved to {output_file}")
 #un-comment to test if code works

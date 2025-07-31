@@ -7,7 +7,7 @@ from email.mime.multipart import MIMEMultipart
 import pandas as pd
 
 # Define your stock symbols and the number of shares you own from the Stock CSV into dictionary
-df = pd.read_excel(r'C:\Users\YourUsername\stockReportingSuite\data\Stocks.xlsx')
+df = pd.read_excel(r'C:\Users\Cdabo\PycharmProjects\stockReportingSuite\data\Stocks.xlsx')
 holdings = dict(zip(df['Stock ETF'], df['Shares']))
 
 # Fetch stock data

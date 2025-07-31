@@ -1,255 +1,218 @@
-Stock Portfolio Analysis & Machine Learning Predictor
-Table of Contents
-Overview
+# Stock Portfolio Analysis & Machine Learning Predictor
 
-Features
+A robust Python-based solution for managing personal stock portfolios, combining automated daily reporting and machine learning-based price prediction.
+This suite has helped me personally track my investments and make informed decisions of when to sell and buy.
+Using a Raspberry Pi as a server to run this software in combination with cron jobs has given me 
+daily financial algorithmic and Machine Learning / AI based advice. This advice has helped me grow 
+my personal investments with precise risk analysis.
 
-Project Structure
+---
 
-Getting Started
+## Table of Contents
 
-Prerequisites
+- Overview
+- Features
+- Project Structure
+- Getting Started
+  - Prerequisites
+  - Installation
+  - Configuration
+  - Usage
+- Data Sources
+- Technologies Used
+- Future Enhancements
+- License
+- Contact
 
-Installation
+---
 
-Configuration
+## Overview
 
-Usage
+This project automates the process of:
 
-Data Sources
+- Fetching up-to-date financial data
+- Generating daily investment reports
+- Predicting stock prices using an LSTM model
 
-Technologies Used
+It enables users to track investments efficiently and make informed decisions through predictive analytics.
 
-Future Enhancements
+**Key skills demonstrated:**
 
-License
+- Python programming (OOP, scripting, automation)
+- Data extraction and analysis (yfinance, pandas, scikit-learn)
+- LSTM-based machine learning (TensorFlow/Keras)
+- Email automation
+- Data visualization (Matplotlib)
+- Git version control
 
-Contact
+---
 
-Overview
-This project provides a robust solution for personal stock portfolio management, combining automated reporting with machine learning-driven price prediction. It automates the process of fetching up-to-date financial data, generating insightful daily investment reports, and training an LSTM model to forecast stock closing prices. This enables users to monitor their investments effectively and leverage predictive analytics for more informed decision-making.
+## Features
 
-This project demonstrates proficiency in:
+### Automated Daily Investment Reports
 
-Python programming (scripting, data manipulation, object-oriented principles)
+- Fetches real-time stock prices, volume, and RSI for holdings defined in `Stocks.xlsx`
+- Calculates individual and total portfolio value
+- Generates HTML reports with buy/sell/hold suggestions based on:
+  - RSI (e.g., overbought/oversold) using 14 day window
+  - Significant price change
+- Emails reports to a specified recipient
 
-Data Extraction (utilizing the yfinance API)
+### Historical Data Extraction
 
-Data Analysis & Preprocessing (Pandas, NumPy, Scikit-learn)
+- Retrieves historical OHLCV and fundamental data via Yahoo Finance
+- Calculates:
+  - VWAP
+  - SMA (10-day)
+  - RSI
+- Adds time-based features for ML (e.g., day, month, weekday, is_weekend)
+- Saves all data into a CSV for training and prediction
 
-Machine Learning (building, training, and evaluating LSTM models with TensorFlow/Keras)
+### Stock Price Prediction with Machine Learning
 
-Automation (email reporting, data updates)
+- Implements an LSTM model to forecast closing prices
+- Preprocessing includes:
+  - StandardScaler (numerical features)
+  - OneHotEncoder (categorical stock symbols)
+- Includes:
+  - Train/test split
+  - Model training and evaluation
+  - Visualization of predictions and residuals
+- Saves:
+  - Trained model (`my_model.keras`)
+  - Preprocessing pipeline (`preprocessor.pkl`)
+- Provides predicted closing prices for the latest data
 
-Data Visualization (Matplotlib for model evaluation)
+---
 
-Version Control (Git/GitHub)
+## Project Structure
 
-Features
-Automated Daily Investment Reports:
+```
+stockReportingSuite/
+├── data
+|    |__Stocks.xlsx
+|    |__yahooSemi_2010_2025.csv
+├── portfolio
+|    |__ModelControl.py
+├── Scripts
+|    |__holdingsDailyReport.py
+|    |__machineLearningPredictions.py
+|         |__my_model.keras
+|         |__preprocessor.pkl     
+|    |__yahooHistoricData.py
+├── tests
+├── .gitignore
+├── LICENSE.md
+├── README.md
+└── requirements.txt
+```
 
-Fetches live stock prices, daily changes, volume, and Relative Strength Index (RSI) for holdings defined in an Excel file.
+## Getting Started
 
-Calculates the current value of each holding and the total portfolio value.
+### Prerequisites
 
-Generates a detailed HTML report with buy/sell/hold suggestions based on predefined criteria (e.g., significant price drop, overbought/oversold RSI).
+- Python 3.9+
+- Git
 
-Emails the generated report to a specified recipient.
+### Installation
 
-Comprehensive Historical Data Extraction:
-
-Pulls extensive historical OHLCV (Open, High, Low, Close, Volume) data and fundamental metrics (P/E Ratio, Market Cap, Dividend Yield, Beta) from Yahoo Finance.
-
-Calculates technical indicators like Volume Weighted Average Price (VWAP), Simple Moving Average (SMA_10), and RSI.
-
-Extracts time-based features (Year, Month, Day, Weekday, Is_Weekend) for enhanced machine learning input.
-
-Combines all data and saves it to a CSV file for subsequent machine learning tasks.
-
-Machine Learning Stock Price Prediction:
-
-Implements a Long Short-Term Memory (LSTM) neural network model for predicting stock closing prices.
-
-Utilizes a robust preprocessing pipeline including StandardScaler for numerical features and OneHotEncoder for categorical features (stock symbols).
-
-Splits data into training and testing sets, trains the LSTM model, and evaluates its performance (Mean Absolute Error).
-
-Saves the trained model and preprocessing pipeline for future use without retraining.
-
-Generates visual plots (Actual vs. Predicted Prices, Residuals Distribution) to assess model accuracy.
-
-Provides predicted closing prices for the latest available data for each stock in your portfolio.
-
-Project Structure
-my_stock_project/
-├── .venv/                         # Python Virtual Environment
-├── data/
-│   ├── Stocks.xlsx                # Excel file: Defines your stock/ETF holdings (Symbol, Shares)
-│   └── yahooSemi_2010_2025.csv    # CSV file: Stores historical stock data and fundamental metrics (generated by yahoo_data_extractor.py)
-├── portfolio/                     # (Optional) Placeholder for potential future GUI development
-├── scripts/
-│   ├── holdingsDailyReport.py     # Python script: Fetches live data, generates, and emails the daily investment report.
-│   ├── machineLearningPrediction.py # Python script: Trains, evaluates, and uses the LSTM model for price prediction.
-│   └── yahooHistoricData.py       # Python script: Fetches and preprocesses historical stock and fundamental data.
-├── tests/                         # (Optional) Unit and integration tests for your scripts.
-├── .gitignore                     # Specifies files and directories to be ignored by Git (e.g., .venv, .env, saved models).
-├── README.md                      # This project's documentation.
-└── requirements.txt               # Lists all Python package dependencies.
-
-Getting Started
-Follow these instructions to set up and run the project on your local machine.
-
-Prerequisites
-Python 3.9+ (or the version specified in your requirements.txt)
-
-Git
-
-Installation
 Clone the repository:
-
 git clone https://github.com/cboyer-engineer/Stock-Portfolio-ML-Project
-cd your-repo-name
+cd Stock-Portfolio-ML-Project
+Create and activate a virtual environment:
+Windows .venv/bin/activate
+Linux python -m venv .venv
 
-(Remember to replace YourGitHubUsername and your-repo-name with your actual GitHub details.)
-
-Create and activate the virtual environment:
-
-python -m venv .venv
-# On Linux/macOS:
-source .venv/bin/activate
-# On Windows:
-.venv\Scripts\activate
-
-Install dependencies:
-
+Dependencies install:
 pip install -r requirements.txt
+### Configuration
+#### 1. Create `data/Stocks.xlsx`
 
-Configuration
-This project requires an Excel file for stock holdings and email credentials for sending reports. For security, it's highly recommended to use environment variables for sensitive information.
+A two-column Excel file with:
 
-Create data/Stocks.xlsx:
-
-In the data/ directory, create an Excel file named Stocks.xlsx.
-
-It should contain at least two columns: Stock ETF (for ticker symbols, e.g., AAPL, MSFT) and Shares (for the number of shares you own).
-
-Example Stocks.xlsx content:
 | Stock ETF | Shares |
 |-----------|--------|
 | AAPL      | 10     |
 | MSFT      | 5      |
 | GOOG      | 2      |
 
-Create a .env file for email credentials:
+#### 2. Create a `.env` file in the root directory:
+SENDER_EMAIL=your_email@gmail.com
+EMAIL_APP_PASSWORD=your_gmail_app_password
+RECIPIENT_EMAIL=recipient_email@example.com
 
-In the root directory of your project, create a file named .env.
+> Use a Gmail App Password if 2FA is enabled.
 
-Add the following variables, replacing the placeholders with your actual details:
+#### 3. Update Paths (Optional)
 
-SENDER_EMAIL=your_sending_email@gmail.com
-EMAIL_APP_PASSWORD=your_gmail_app_password # IMPORTANT: Use an app password for Gmail, not your main password
-RECIPIENT_EMAIL=your_recipient_email@example.com # Can be the same as SENDER_EMAIL
+Modify hardcoded paths in scripts to use relative paths, e.g. change:
+r'C:\Users\YourName\Projects\stockReportingSuite\data\Stocks.xlsx'
 
-Note for Gmail users: If you have 2-Factor Authentication (2FA) enabled, you'll need to generate an "App password" from your Google Account security settings to allow applications to send emails. Using your main password directly is not secure and may not work.
+## Usage
 
-Update Hardcoded Paths (Optional but Recommended):
-
-Currently, the scripts use hardcoded paths (e.g., r'C:\Users\Cdabo\PycharmProjects\stockReportingSuite\data\Stocks.xlsx').
-
-For portability, you should update these paths to be relative to your project's root, or use configuration variables. For example, change r'C:\Users\Cdabo\PycharmProjects\stockReportingSuite\data\Stocks.xlsx' to './data/Stocks.xlsx'.
-
-Usage
-Follow these steps to run the various components of the project:
-
-Ensure your virtual environment is active.
-
-# On Linux/macOS:
-source .venv/bin/activate
-# On Windows:
-.venv\Scripts\activate
-
-1. Extract and Prepare Historical Data:
-Run the yahooHistoricData.py script to fetch historical stock data and fundamental metrics for the symbols listed in Stocks.xlsx. This will create or update data/yahooSemi_2010_2025.csv.
-
+### 1. Extract Historical Data
 python scripts/yahooHistoricData.py
-
-This script is automatically called by machineLearningPrediction.py as well, but running it separately ensures your data is up-to-date before training.
-
-2. Train and Predict Stock Prices:
-Execute the machineLearningPrediction.py script. This will:
-
-Load data from data/yahooSemi_2010_2025.csv.
-
-Train the LSTM model.
-
-Evaluate the model and display plots.
-
-Print predicted closing prices for the latest available data for each stock.
-
-Save the trained model (my_model.keras) and preprocessor (preprocessor.pkl) in the project root.
-
+This pulls and saves historical stock data into `data/yahooSemi_2010_2025.csv`.
+### 2. Train and Predict with LSTM
 python scripts/machineLearningPrediction.py
-
-3. Generate and Email Daily Investment Report:
-Run the holdingsDailyReport.py script to fetch live stock data for your holdings, generate an HTML report, and send it to the RECIPIENT_EMAIL configured in your .env file.
-
+- Trains and evaluates an LSTM model
+- Saves model and preprocessor
+- Prints predictions
+- Displays evaluation plots
+### 3. Generate and Email Report
 python scripts/holdingsDailyReport.py
+- Fetches live prices
+- Builds daily HTML report
+- Emails it to recipient
 
-Data Sources
-data/Stocks.xlsx: A user-defined Excel file containing the stock/ETF symbols and the number of shares held. This is the primary input for defining your portfolio.
+---
 
-data/yahooSemi_2010_2025.csv: A CSV file generated by yahooHistoricData.py. It contains comprehensive historical OHLCV data, calculated technical indicators (VWAP, SMA_10, RSI), timestamp features, and fundamental metrics (P/E Ratio, Market Cap, Dividend Yield, Beta) for the stocks in your Stocks.xlsx.
+## Data Sources
 
-Yahoo Finance API: Utilized via the yfinance Python library to fetch real-time and historical stock data.
+- **Stocks.xlsx**: Portfolio holdings
+- **yahooSemi_2010_2025.csv**: Historical OHLCV + indicators + fundamentals
+- **Yahoo Finance**: Via `yfinance` API
 
-Technologies Used
-Python (Core programming language)
+---
 
-Pandas: Essential for data manipulation, analysis, and handling DataFrames.
+## Technologies Used
 
-NumPy: Provides support for large, multi-dimensional arrays and matrices, along with a collection of mathematical functions to operate on these arrays.
+- Python
+- Pandas
+- NumPy
+- yfinance
+- scikit-learn
+- TensorFlow / Keras
+- Matplotlib
+- joblib
+- smtplib + email.mime
+- openpyxl
+- python-dotenv
 
-yfinance: A powerful and easy-to-use library for downloading historical market data from Yahoo Finance.
+---
 
-Scikit-learn: Used for data preprocessing (scaling, one-hot encoding), data splitting, and general machine learning utilities.
+## Future Enhancements
 
-TensorFlow / Keras: The framework used to build, train, and evaluate the Long Short-Term Memory (LSTM) neural network for stock price prediction.
+- Interactive GUI (PyQt, Tkinter, Flask, or Dash)
+- Automated scheduling (cron, Task Scheduler, APScheduler)
+- Database integration (SQLite, PostgreSQL, MongoDB)
+- Advanced models (ARIMA, Prophet, Transformers)
+- Sentiment analysis integration
+- Portfolio risk analysis (e.g., VaR, volatility)
+- Expanded unit testing
+- Cloud deployment (e.g., AWS Lambda)
 
-Matplotlib: For creating static, animated, and interactive visualizations (e.g., actual vs. predicted plots, residual distribution).
+---
 
-joblib: For efficiently saving and loading Python objects, specifically the trained machine learning model and preprocessor.
+## License
 
-smtplib & email.mime (built-in Python libraries): Used for constructing and sending email reports.
+This project is licensed under the MIT License — see `LICENSE.md` for details.
 
-openpyxl: A library for reading and writing Excel 2010 xlsx/xlsm/xltx/xltm files, implicitly used by Pandas to read Stocks.xlsx.
+---
 
-python-dotenv: (Recommended) For securely loading environment variables from a .env file.
+## Contact
 
-Future Enhancements
-Interactive GUI: Develop a graphical user interface (e.g., using PyQt, Tkinter, or a web framework like Flask/Dash) for real-time portfolio tracking, interactive data visualization, and ML prediction insights.
+**Name:** Christopher Boyer  
+**LinkedIn:** [linkedin.com/in/chris-boyer31415](https://linkedin.com/in/chris-boyer31415)  
+**GitHub:** [cboyer-engineer](https://github.com/cboyer-engineer)
 
-Automated Scheduling: Implement a robust scheduling mechanism (e.g., using cron jobs on Linux/macOS, Task Scheduler on Windows, or a Python scheduler like APScheduler) to automatically run data extraction, ML prediction, and report generation daily.
-
-Database Integration: Replace CSV file storage with a more robust database solution (e.g., SQLite, PostgreSQL, MongoDB) for better data management and scalability.
-
-Advanced ML Models: Experiment with and compare other time series forecasting models (e.g., ARIMA, Prophet, Transformers) or ensemble methods to potentially improve prediction accuracy.
-
-Sentiment Analysis: Integrate news sentiment analysis to incorporate qualitative data into prediction models or reporting.
-
-Risk Analysis: Add features for calculating portfolio risk metrics (e.g., VaR, volatility) and diversification analysis.
-
-Unit and Integration Tests: Expand the tests/ directory with comprehensive test cases to ensure the reliability and correctness of all scripts.
-
-Cloud Deployment: Explore deploying the data extraction and reporting components to a cloud platform (e.g., AWS Lambda, Google Cloud Functions) for serverless execution.
-
-License
-This project is licensed under the MIT License - see the LICENSE.md file for details.
-
-Contact
-Feel free to connect with me!
-
-Name: Christopher Boyer
-
-LinkedIn: linkedin.com/in/chris-boyer31415
-
-GitHub: [cboyer-engineer]
