@@ -3,15 +3,15 @@ import pandas as pd
 from datetime import datetime, timedelta
 
 def dataPullYahoo():
-    # Pull stock symbol and date range from the Stock CSV
-    df = pd.read_excel(r'C:\Users\YourUsername\stockReportingSuite\data\Stocks.xlsx')
+    # Pull stock symbol and date range from the Stock excel file
+    df = pd.read_excel(r'C:\Users\yourusernames\stockReportingSuite\data\Stocks.xlsx')
     symbols = df['Stock ETF'].tolist()
-
-    start_date = "2010-01-01"
-
+    #define start date of stocks historical capture
+    start_date = "2020-01-01"
+    #define end date as current date or earlier date
     end_date = datetime.now() - timedelta(days=1)
     end_date = end_date.strftime("%Y-%m-%d")
-    #end_date = "2024-12-12"
+
 
     combined_data = pd.DataFrame()
 
@@ -76,8 +76,8 @@ def dataPullYahoo():
         except Exception as e:
             print(f"Error fetching data for {symbol}: {e}")
     # Save to CSV
-    output_file = r'C:\Users\YourUsername\stockReportingSuite\data\yahooSemi_2010_2025.csv'
+    output_file = r'C:\Users\yourusername\stockReportingSuite\data\yahooSemi_2010_2025.csv'
     combined_data.to_csv(output_file, index=False)
     #print(f"Dataset saved to {output_file}")
-    #test if code works
-    #dataPullYahoo()
+#un-comment to test if code works
+#dataPullYahoo()
